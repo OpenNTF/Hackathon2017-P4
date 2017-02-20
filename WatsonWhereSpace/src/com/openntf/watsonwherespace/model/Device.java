@@ -1,3 +1,4 @@
+package com.openntf.watsonwherespace.model;
 
 public class Device {
 	

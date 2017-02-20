@@ -1,3 +1,5 @@
+package com.openntf.watsonwherespace.model;
+
 import java.util.Date;
 import java.util.List;
 

@@ -1,9 +1,10 @@
+package com.openntf.watsonwherespace.model;
 
 public class Person {
 	private String firstName;
 	private String lastName;
 	private String department;
-	private long id;
+	private String id;
 	//private Location activeLocation;
 	//private String defaultLocation;
 	private String email;
@@ -32,10 +33,10 @@ public class Person {
 	public void setDepartment(String department) {
 		this.department = department;
 	}
-	public long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
