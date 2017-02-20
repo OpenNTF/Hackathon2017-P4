@@ -1,0 +1,197 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.openntf.watsonwherespace</groupId>
+	<artifactId>org.openntf.watsonwherespace.library</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Who What Where</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<tycho-version>0.22.0</tycho-version>
+		<compiler>1.8</compiler>
+		<manifest-location>META-INF</manifest-location>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.opencode4workspace.watson-work-services</groupId>
+			<artifactId>wws-api</artifactId>
+			<version>0.6.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<!-- <projectNameTemplate>${project.groupId}-${project.artifactId}</projectNameTemplate> 
+						<downloadSources>true</downloadSources> <downloadJavadocs>false</downloadJavadocs> 
+						<additionalBuildcommands> <buildcommand>org.eclipse.jdt.core.javabuilder</buildcommand> 
+						<buildcommand>org.eclipse.pde.ManifestBuilder</buildcommand> <buildcommand>org.eclipse.pde.SchemaBuilder</buildcommand> 
+						</additionalBuildcommands> <additionalProjectnatures> <projectnature>org.eclipse.pde.PluginNature</projectnature> 
+						<projectnature>org.eclipse.jdt.core.javanature</projectnature> </additionalProjectnatures> -->
+					<classpathContainers>
+						<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6</classpathContainer>
+						<classpathContainer>org.eclipse.pde.core.requiredPlugins</classpathContainer>
+					</classpathContainers>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${compiler}</source>
+					<target>${compiler}</target>
+					<compilerArgument>-err:-forbidden,discouraged,deprecation</compilerArgument>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>WebContent\WEB-INF\lib</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<!-- enable tycho build extension -->
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<pomDependencies>consider</pomDependencies>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<strictVersions>false</strictVersions>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-compiler-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<source>${compiler}</source>
+					<target>${compiler}</target>
+					<compilerArgument>-err:-forbidden,discouraged,deprecation</compilerArgument>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>plugin-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<environments>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+					<dependency-resolution>
+						<extraRequirements>
+							<requirement>
+								<type>eclipse-plugin</type>
+								<id>com.ibm.notes.java.api.win32.linux</id>
+								<versionRange>[9.0.1,9.0.2)</versionRange>
+							</requirement>
+						</extraRequirements>
+					</dependency-resolution>
+					<resolver>p2</resolver>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-versions-plugin</artifactId>
+				<version>${tycho-version}</version>
+			</plugin>
+			<!-- <plugin> <groupId>org.eclipse.tycho.extras</groupId> <artifactId>tycho-p2-extras-plugin</artifactId> 
+				<version>${tycho-version}</version> <configuration> <source> source repositories 
+				to mirror from <repository> <url>http://download.eclipse.org/releases/juno/</url> 
+				<layout>p2</layout> </repository> </source> </configuration> </plugin> -->
+			<!-- <plugin> <groupId>org.eclipse.tycho</groupId> <artifactId>tycho-p2-repository-plugin</artifactId> 
+				<version>${tycho-version}</version> <configuration> <includeAllDependencies>true</includeAllDependencies> 
+				</configuration> </plugin> -->
+		</plugins>
+	</build>
+
+	<licenses>
+		<license>
+			<name>Apache License, V2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>withersp</id>
+			<name>Paul Withers</name>
+			<email>pwithers@intec.co.uk</email>
+			<organization>Intec Systems Ltd</organization>
+			<organizationUrl>https://www.intec.co.uk</organizationUrl>
+			<url>https://paulwithers.github.io</url>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>0</timezone>
+		</developer>
+	</developers>
+</project>
