@@ -23,6 +23,16 @@ public class MockDataGenerator {
     private static final List<Location> locations = null;
     private static final List<Event> events = null;
     
+    public MockDataGenerator(){
+    	
+    }
+    
+    public static void run(){
+    	createLocations();
+    	createPeople();
+    	createEvents();
+    }
+    
     private static void createPeople() {
         Person person = new Person();
         person.setDepartment("Development");
