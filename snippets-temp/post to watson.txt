@@ -1,0 +1,15 @@
+public static void tellWatson() throws UnsupportedEncodingException, WWException {
+		WWClient client = WWClient.buildClientApplicationAccess("7dde8284-e3d6-45d3-a6b1-3cfd6032018f",
+				"5wegd9r7gxfrpnxs2exhb2ng7pt1k85l", new WWAuthenticationEndpoint());
+		client.authenticate();
+		AppMessageBuilder builder = new AppMessageBuilder();
+		builder.setActorAvatar("http://gravatar.com/wws").setActorName("Watson WhereSpace").setActorUrl(
+				"http://openntf.org").setColor("#FF0000");
+		builder.setMessageTitle("Paul Withers just updated his location");
+		builder.setMessage("Paul Withers is in IBM Connect 21st Feb 2017");
+		AppMessage message = builder.build();
+		MessageResponse messageResp = client.postMessageToSpace(message, "58ab6ecbe4b0159c34394a72");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		ExtLibUtil.getViewScope().put("message",
+				messageResp.getId() + " posted " + sdf.format(messageResp.getCreated()));
+	}
