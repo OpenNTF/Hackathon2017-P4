@@ -36,6 +36,16 @@ public class MockDataGenerator {
         
         person = new Person();
         person.setDepartment("Development");
+        person.setEmail("betty.robinson@brytek.ca");
+        person.setFirstName("Betty");
+        person.setLastName("Robinson");
+        person.setId("20");
+        person.setMobilePhoneNumber("(604) 916-7526");
+
+        people.add(person);
+        
+        person = new Person();
+        person.setDepartment("Development");
         person.setEmail("kgodbold@canalbarge.com");
         person.setFirstName("Kerry");
         person.setLastName("Godbold");
